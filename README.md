@@ -19,3 +19,8 @@ Looks like hosting on gh-pages doesn't require anything special to get it workin
 
 Less command:
 less-watch-compiler less css index.less
+
+http-server issues:
+
+404's- when accessing via 127.0.0.1:8080/index.html, it could not find image assets. likely due to not being in the public folder?
+use: http://localhost:8080/index.html instead- works as expected.
