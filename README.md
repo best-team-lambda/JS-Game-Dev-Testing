@@ -1,5 +1,7 @@
 https://best-team-lambda.github.io/JS-Game-Dev-Testing/
 
+http://www.yeahbutisitflash.com/?p=5226
+
 # JS-Game-Dev-Testing
 
 Setup instructions:
