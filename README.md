@@ -1,3 +1,5 @@
+https://best-team-lambda.github.io/JS-Game-Dev-Testing/
+
 # JS-Game-Dev-Testing
 
 Setup instructions:
@@ -24,3 +26,28 @@ http-server issues:
 
 404's- when accessing via 127.0.0.1:8080/index.html, it could not find image assets. likely due to not being in the public folder?
 use: http://localhost:8080/index.html instead- works as expected.
+
+
+Sprites:
+//load an image and run the `setup` function when it's done
+PIXI.loader
+  .add("images/cat.png")
+  .load(setup);
+
+//This `setup` function will run when the image has loaded
+function setup() {
+
+  //Create the cat sprite
+  let cat = new PIXI.Sprite(PIXI.loader.resources["images/cat.png"].texture);
+  
+  //Add the cat to the stage
+  app.stage.addChild(cat);
+}
+If you ever need to remove a sprite from the stage, use the `removeChild` method:
+```js
+app.stage.removeChild(anySprite)
+```
+But usually setting a sprite’s `visible` property to `false` will be a simpler and more efficient way of making sprites disappear.
+```js
+anySprite.visible = false;
+```
