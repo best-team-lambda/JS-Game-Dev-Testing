@@ -50,19 +50,23 @@
         //Define variables that might be used in more 
         //than one function
         let mercMale;
+        let mercMaleTexture;
         let tick = true;
         const moveSpeed = 5;
+        const leftAnim = [new Rectangle(0,0,75,75), new Rectangle(75,0,75,75), new Rectangle(150,0,75,75), new Rectangle(225,0,75,75)];
+        const rightAnim = [new Rectangle(0,225,75,75), new Rectangle(75,225,75,75), new Rectangle(150,225,75,75), new Rectangle(225,225,75,75)];
         
         function setup() {
         
           //There are 3 ways to make sprites from textures atlas frames
         
           // //1. Access the `TextureCache` directly
-          let mercMaleTexture = TextureCache["images/mercmale.png"];
+          mercMaleTexture = TextureCache["images/mercmale.png"];
           mercMale = new Sprite(mercMaleTexture);
           app.stage.addChild(mercMale);
-
-          mercMaleTexture.frame = new Rectangle(0,0,75,75);
+          
+          
+          mercMaleTexture.frame = rightAnim[0];
 
           //Start the game loop by adding the `gameLoop` function to
           //Pixi's `ticker` and providing it with a `delta` argument.
@@ -77,6 +81,7 @@
             mercMale.x += moveSpeed;
             if (mercMale.x >= 512-75){
               tick = false;
+            mercMaleTexture.frame = leftAnim[0];
             }
           }
           else if (tick === false)
@@ -86,6 +91,7 @@
             mercMale.x -= moveSpeed;
             if (mercMale.x <= 0){
               tick = true;
+            mercMaleTexture.frame = rightAnim[0];
             }
           }
         }
