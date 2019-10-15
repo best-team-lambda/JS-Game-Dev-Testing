@@ -50,6 +50,8 @@
         //Define variables that might be used in more 
         //than one function
         let mercMale;
+        let tick = true;
+        const moveSpeed = 5;
         
         function setup() {
         
@@ -60,7 +62,34 @@
           mercMale = new Sprite(mercMaleTexture);
           app.stage.addChild(mercMale);
 
+          mercMaleTexture.frame = new Rectangle(0,0,75,75);
+
+          //Start the game loop by adding the `gameLoop` function to
+          //Pixi's `ticker` and providing it with a `delta` argument.
+          app.ticker.add(delta => gameLoop(delta));
         }
+        
+
+        function gameLoop(delta){
+          if (tick === true){
+            // console.log(tick);
+            // console.log(mercMale.x);
+            mercMale.x += moveSpeed;
+            if (mercMale.x >= 512-75){
+              tick = false;
+            }
+          }
+          else if (tick === false)
+          {
+            // console.log(tick);
+            // console.log(mercMale.x);
+            mercMale.x -= moveSpeed;
+            if (mercMale.x <= 0){
+              tick = true;
+            }
+          }
+        }
+
         </script>
         </body>
   </body>
