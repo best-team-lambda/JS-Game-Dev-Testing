@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Hello World</title>
-    <script src="pixi/pixi.js"></script>
+    <!-- <script src="pixi/pixi.js"></script> -->
     <!-- <script src="mainJS.js" async></script> -->
   </head>
     
   <body>
     <script src="pixi/pixi.js"></script>
+    <script src="./Animations.js"></script>
     <script type="text/javascript">
       let type = "WebGL"
       if(!PIXI.utils.isWebGLSupported()){
@@ -17,129 +18,6 @@
 
       PIXI.utils.sayHello(type)
     </script>
-
-    <script>
-
-        //Aliases
-        let Application = PIXI.Application,
-            Container = PIXI.Container,
-            loader = PIXI.Loader.shared,
-            resources = PIXI.Loader.shared.resources,
-            TextureCache = PIXI.utils.TextureCache,
-            Sprite = PIXI.Sprite,
-            Rectangle = PIXI.Rectangle;
-        
-        //Create a Pixi Application
-        let app = new Application({ 
-            width: 512, 
-            height: 512,                       
-            antialias: true, 
-            transparent: false, 
-            resolution: 1
-          }
-        );
-        
-        //Add the canvas that Pixi automatically created for you to the HTML document
-        document.body.appendChild(app.view);
-        
-        //load a JSON file and run the `setup` function when it's done
-        loader
-          .add("images/mercmale.png")
-          .load(setup);
-        
-        //Define variables that might be used in more 
-        //than one function
-        let mercMale;
-        let mercMaleTexture;
-        let mercMaleDirection = 4; //1:left 2:up 3:down 4:right
-        let tick = true;
-        const moveSpeed = 5;
-        const leftAnim = [new Rectangle(0,0,75,75), new Rectangle(75,0,75,75), new Rectangle(150,0,75,75), new Rectangle(225,0,75,75)];
-        const rightAnim = [new Rectangle(0,225,75,75), new Rectangle(75,225,75,75), new Rectangle(150,225,75,75), new Rectangle(225,225,75,75)];
-        const delay = 20;
-        let elapsed = 0;
-        let currentFrame = 0;
-        const totalFrames = 3;
-        const animLoop = false;
-        
-        function setup() {
-        
-          //There are 3 ways to make sprites from textures atlas frames
-        
-          // //1. Access the `TextureCache` directly
-          mercMaleTexture = TextureCache["images/mercmale.png"];
-          mercMale = new Sprite(mercMaleTexture);
-          app.stage.addChild(mercMale);
-          
-          
-          mercMaleTexture.frame = rightAnim[0];
-
-          //Start the game loop by adding the `gameLoop` function to
-          //Pixi's `ticker` and providing it with a `delta` argument.
-          app.ticker.add(delta => gameLoop(delta));
-        }
-        
-        function animationUpdater(){
-          elapsed++;
-          if (elapsed >= delay)
-          {
-            elapsed = 0;
-            if (animLoop === false){
-                if (currentFrame < totalFrames)
-              {
-                currentFrame++;
-              }
-              else if (currentFrame === totalFrames){
-                currentFrame = 0;
-              }
-              console.log(currentFrame);
-            }
-            if (mercMaleDirection === 1){
-              mercMaleTexture.frame = leftAnim[currentFrame];
-            }
-            else if (mercMaleDirection === 2){
-              
-            }
-            else if (mercMaleDirection === 3){
-              
-            }
-            else if (mercMaleDirection === 4){
-              mercMaleTexture.frame = rightAnim[currentFrame];
-            }
-          }
-        }
-
-        function walkLeftAndRight(){
-          // console.log('inside walkLeftAndRight');
-          if (tick === true){
-            mercMale.x += moveSpeed;
-            if (mercMale.x >= 512-75){
-              tick = false;
-              currentFrame = 0;
-              elapsed = 0;
-              mercMaleTexture.frame = leftAnim[currentFrame];
-              mercMaleDirection = 1;
-            }
-          }
-          else if (tick === false)
-          {
-            mercMale.x -= moveSpeed;
-            if (mercMale.x <= 0){
-              tick = true;
-              currentFrame = 0;
-              elapsed = 0;
-              mercMaleTexture.frame = rightAnim[currentFrame];
-              mercMaleDirection = 4;
-            }
-          }
-        }
-
-        function gameLoop(delta){
-          walkLeftAndRight();
-          animationUpdater();
-        }
-
-        </script>
-        </body>
+    <script src="./index.js"></script>
   </body>
 </html>
