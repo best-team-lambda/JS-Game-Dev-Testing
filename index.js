@@ -33,12 +33,17 @@
         let tick = true;
         const moveSpeed = 5;
         const leftAnim = [new Rectangle(0,0,75,75), new Rectangle(75,0,75,75), new Rectangle(150,0,75,75), new Rectangle(225,0,75,75)];
+        const downAnim = [new Rectangle(0,75,75,75), new Rectangle(75,75,75,75), new Rectangle(150,75,75,75), new Rectangle(225,75,75,75)];
+        const upAnim = [new Rectangle(0,150,75,75), new Rectangle(75,150,75,75), new Rectangle(150,150,75,75), new Rectangle(225,150,75,75)];
         const rightAnim = [new Rectangle(0,225,75,75), new Rectangle(75,225,75,75), new Rectangle(150,225,75,75), new Rectangle(225,225,75,75)];
+        const idleAnim = [new Rectangle(0,300,75,75), new Rectangle(75,300,75,75), new Rectangle(150,300,75,75), new Rectangle(225,300,75,75)];
         const delay = 20;
         let elapsed = 0;
         let currentFrame = 0;
         const totalFrames = 3;
         const animLoop = false;
+        let walkLR = false;
+        let walkCircles = true;
         
         function setup() {
         
@@ -61,5 +66,6 @@
 
         function gameLoop(delta){
           walkLeftAndRight();
+          walkInCircles(mercMaleDirection);
           animationUpdater();
         }
