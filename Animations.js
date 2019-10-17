@@ -31,6 +31,7 @@ function animationUpdater(){
 function walkLeftAndRight(){
     // console.log('inside walkLeftAndRight');
     if (walkLR){
+        console.log('walkLR');
         if (tick === true){
             mercMale.x += moveSpeed;
             if (mercMale.x >= 512-75){
@@ -54,8 +55,8 @@ function walkLeftAndRight(){
 }
 
 function walkInCircles(direction){
-    console.log(app.width);
-    if (walkInCircles){
+    if (walkCircles){
+        console.log('walkInCircles');
         if (direction === 1){
             mercMale.x -= moveSpeed;
             if (mercMale.x <= 0){
@@ -100,4 +101,27 @@ function walkInCircles(direction){
             
         }
     }
+}
+
+function enableLR(){
+    console.log('enableLR');
+    elapsed = 0;
+    currentFrame = 0;
+    mercMaleDirection = 4; //1:left 2:up 3:down 4:right
+    mercMaleTexture.frame = rightAnim[currentFrame];
+    mercMale.x = 0;
+    mercMale.y = 0;
+    walkLR = true;
+    walkCircles = false;
+}
+function enableCircles(){
+    console.log('enableCircles');
+    elapsed = 0;
+    currentFrame = 0;
+    mercMaleDirection = 4; //1:left 2:up 3:down 4:right
+    mercMaleTexture.frame = rightAnim[currentFrame];
+    mercMale.x = 0;
+    mercMale.y = 0;
+    walkLR = false;
+    walkCircles = true;
 }
