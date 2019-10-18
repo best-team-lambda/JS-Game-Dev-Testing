@@ -1,3 +1,6 @@
+        let xBound = 800;
+        let yBound = 800;
+        
         //Aliases
         let Application = PIXI.Application,
             Container = PIXI.Container,
@@ -9,8 +12,8 @@
         
         //Create a Pixi Application
         let app = new Application({ 
-            width: 512, 
-            height: 512,                       
+            width: xBound, 
+            height: yBound,                       
             antialias: true, 
             transparent: false, 
             resolution: 1
@@ -43,7 +46,14 @@
         const totalFrames = 3;
         const animLoop = false;
         let walkLR = false;
-        let walkCircles = true;
+        let walkCircles = false;
+        let walkKeys = true;
+        
+        let leftArrow = keyboard("ArrowLeft");
+        let upArrow = keyboard("ArrowUp");
+        let downArrow = keyboard("ArrowDown");
+        let rightArrow = keyboard("ArrowRight");
+        console.log(leftArrow);
         
         function setup() {
         
@@ -67,5 +77,6 @@
         function gameLoop(delta){
           walkLeftAndRight();
           walkInCircles(mercMaleDirection);
+          walkByKeys();
           animationUpdater();
         }

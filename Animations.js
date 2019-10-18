@@ -11,9 +11,12 @@ function animationUpdater(){
         else if (currentFrame === totalFrames){
             currentFrame = 0;
         }
-        console.log(currentFrame);
+        // console.log(currentFrame);
         }
-        if (mercMaleDirection === 1){
+        if (mercMaleDirection === 0){
+            mercMaleTexture.frame = idleAnim[currentFrame];
+        }
+        else if (mercMaleDirection === 1){
             mercMaleTexture.frame = leftAnim[currentFrame];
         }
         else if (mercMaleDirection === 2){
@@ -34,7 +37,7 @@ function walkLeftAndRight(){
         console.log('walkLR');
         if (tick === true){
             mercMale.x += moveSpeed;
-            if (mercMale.x >= 512-75){
+            if (mercMale.x >= xBound-75){
                 tick = false;
                 currentFrame = 0;
                 mercMaleTexture.frame = leftAnim[currentFrame];
@@ -57,6 +60,7 @@ function walkLeftAndRight(){
 function walkInCircles(direction){
     if (walkCircles){
         console.log('walkInCircles');
+        console.log(mercMaleDirection);
         if (direction === 1){
             mercMale.x -= moveSpeed;
             if (mercMale.x <= 0){
@@ -76,29 +80,26 @@ function walkInCircles(direction){
                 mercMaleTexture.frame = rightAnim[currentFrame];
                 mercMaleDirection = 4;
             }
-            
         }
         else if (direction === 3){
             mercMale.y += moveSpeed;
-            if (mercMale.y >= 512-75){
-                mercMale.y = 512-75;
+            if (mercMale.y >= yBound-75){
+                mercMale.y = yBound-75;
                 direction = 1;
                 currentFrame = 0;
                 mercMaleTexture.frame = leftAnim[currentFrame];
                 mercMaleDirection = 1;
             }
-            
         }
         else if (direction === 4){
             mercMale.x += moveSpeed;
-            if (mercMale.x >= 512-75){
-                mercMale.x = 512-75;
+            if (mercMale.x >= xBound-75){
+                mercMale.x = xBound-75;
                 direction = 3;
                 currentFrame = 0;
                 mercMaleTexture.frame = downAnim[currentFrame];
                 mercMaleDirection = 3;
             }
-            
         }
     }
 }
@@ -113,6 +114,7 @@ function enableLR(){
     mercMale.y = 0;
     walkLR = true;
     walkCircles = false;
+    walkKeys = false;
 }
 function enableCircles(){
     console.log('enableCircles');
@@ -124,4 +126,5 @@ function enableCircles(){
     mercMale.y = 0;
     walkLR = false;
     walkCircles = true;
+    walkKeys = false;
 }
